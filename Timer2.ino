@@ -21,25 +21,17 @@ TM1637Display display(CLK, DIO);
 
 void setup()
 {
-    pinMode(4, INPUT_PULLUP);
-    display.setBrightness(0x0f);
-    //reset LED display to zero
-    display.showNumberDec(0, false);
+  pinMode(4, INPUT_PULLUP);
+  display.setBrightness(0x0f);
+  //reset LED display to zero
+  display.showNumberDec(0, false);
 }
-
-void stopWatch();
 
 void loop()
 {
-    key = digitalRead(4);   // read the key state
+  key = digitalRead(4);   // read the key state
 
-    
-
-    delay(10);
-}
-
-void stopWatch() {
-    //start timer if stopped, timer not running and keypressed
+//start timer if stopped, timer not running and keypressed
   if ((state == 0) && (key == LOW) && (!bounceLockout)) 
   {
     startMillis = millis();
@@ -75,7 +67,7 @@ void stopWatch() {
     bounceLockout = true;
   }
 
-//reset the timer if paused
+//pause the time if key pressed
  if ((state == 2) && (key == LOW) && (!bounceLockout)) 
   {
     startBounce = millis();
@@ -84,4 +76,6 @@ void stopWatch() {
     state = 0;
     bounceLockout = true;
   }  
+
+  delay(10);
 }
