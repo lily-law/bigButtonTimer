@@ -158,7 +158,7 @@ void stopWatch() {
     }
     if (state == 1) { //display the time
         //display seconds on the LED display
-        int rawMs = millis()-startMillis;
+        unsigned long rawMs = millis()-startMillis;
         displayTime(rawMs, true);
     }
     if (state == 0) { //reset the timer
