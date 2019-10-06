@@ -171,9 +171,11 @@ void pomodoro() {
     if (buttonShortPressed) {
         if (state != 1) {
             state = 1; // start timer
+            pomodoroTimer += millis();
         }
         else {
             state = 2;
+            pomodoroTimer -= millis(); // pause so store time left
         }
         buttonShortPressed = false;
     }
@@ -189,8 +191,7 @@ void pomodoro() {
           beep(15, 50, 25);
         }
         else {
-          pomodoroTimer -= msElapsed;
-          displayTime(pomodoroTimer, true);
+          displayTime(pomodoroTimer - millis(), true);
         }
     }
     lastPomoTime = millis();
