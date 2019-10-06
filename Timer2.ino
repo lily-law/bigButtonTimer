@@ -68,7 +68,7 @@ void loop()
             if (!buttonPressed) { // if button is pressed record when
                 buttonPressed = millis();
             }
-            else if (millis() - keyPressed > longPress) { // button long pressed
+            else if (millis() - buttonPressed > longPress) { // button long pressed
                 if (mode != 0) {
                     mode = 0;
                 }
