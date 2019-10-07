@@ -167,7 +167,6 @@ void stopWatch() {
 }
 
 void pomodoro() {
-    unsigned long msElapsed = millis() - lastPomoTime;
     if (buttonShortPressed) {
         if (state != 1) {
             state = 1; // start timer
@@ -179,22 +178,20 @@ void pomodoro() {
         }
         buttonShortPressed = false;
     }
-    if (msElapsed > 100) {
-    if (state == 0) { // stopped, set timer start
-        pomodoroTimer = ((count % 2) == 0) ? workTime : (count > 1 && ((count + 1) % 8) == 0) ? longBreakTime : breakTime;
-        displayTime(pomodoroTimer, false);
-    }
-    else if (state == 1) { // running
-        if (pomodoroTimer < 1000) { // timer finished
-          state = 0;
-          count += 1;
-          beep(15, 50, 25);
-        }
-        else {
-          displayTime(pomodoroTimer - millis(), true);
-        }
-    }
-    lastPomoTime = millis();
+      if (state == 0) { // stopped, set timer start
+          pomodoroTimer = ((count % 2) == 0) ? workTime : (count > 1 && ((count + 1) % 8) == 0) ? longBreakTime : breakTime;
+          displayTime(pomodoroTimer, false);
+      }
+      else if (state == 1) { // running
+          unsigned long remainingTime = pomodoroTimer - millis();
+          if (remainingTime < 100) { // timer finished
+            state = 0;
+            count += 1;
+            beep(15, 50, 25);
+          }
+          else {
+            displayTime(remainingTime, true);
+          }
     }
 }
 
