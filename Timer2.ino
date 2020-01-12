@@ -33,10 +33,6 @@ uint8_t dataSTOP[] = { 0x6D, 0x78, 0x3F, 0x73 };
 uint8_t dataPOMO[] = { 0x73, 0x3F, 0x55, 0x3F }; 
 uint8_t dataCONT[] = { 0x39, 0x3F, 0x54, 0x78 }; 
 
-/*
- * 0x06: 1, 0x07: 7, 0x08: _, 
- */
-
 // menu
 void menu();
 int selected = 1;
@@ -63,7 +59,6 @@ void setup()
 {
     pinMode(4, INPUT_PULLUP);
     pinMode(5, OUTPUT);
-    //display.setBrightness(0x0f);
     display.setBrightness(2);
     //reset LED display to zero
     display.showNumberDec(0, false);
